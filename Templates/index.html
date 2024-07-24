@@ -34,10 +34,28 @@
             font-size: 18px;
             color: #28a745;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <h1 class="text-center">Welcome</h1>
+        <form id="login-form" class="mt-4">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+    </div>
+
+    <div class="container hidden" id="prediction-container">
         <h1 class="text-center">Jumia Sales Prediction Model</h1>
         <form id="prediction-form" class="mt-4">
             <div class="form-group">
@@ -70,6 +88,20 @@
     </div>
 
     <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Perform your login validation here (this is a simple example)
+            if (username === 'admin' && password === 'password') {
+                document.getElementById('login-form').classList.add('hidden');
+                document.getElementById('prediction-container').classList.remove('hidden');
+            } else {
+                alert('Invalid login credentials');
+            }
+        });
+
         document.getElementById('prediction-form').addEventListener('submit', function(event) {
             event.preventDefault();
             const formData = new FormData(event.target);
